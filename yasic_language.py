@@ -1,7 +1,7 @@
 from sly import Lexer
 from sly import Parser
 
-class BasicLexer(Lexer):
+class YasicLexer(Lexer):
     tokens = { NAME, NUMBER, STRING, IF, THEN, ELSE, FOR, FUN, TO, ARROW, EQEQ }
     ignore = '\t '
 
@@ -33,8 +33,8 @@ class BasicLexer(Lexer):
     def newline(self,t ):
         self.lineno = t.value.count('\n')
 
-class BasicParser(Parser):
-    tokens = BasicLexer.tokens
+class YasicParser(Parser):
+    tokens = YasicLexer.tokens
 
     precedence = (
         ('left', '+', '-'),
@@ -115,7 +115,7 @@ class BasicParser(Parser):
 
 
 
-class BasicExecute:
+class YasicExecute:
 
     def __init__(self, tree, env):
         self.env = env
@@ -206,12 +206,12 @@ class BasicExecute:
 
 
 if __name__ == '__main__':
-    lexer = BasicLexer()
-    parser = BasicParser()
+    lexer = YasicLexer()
+    parser = YasicParser()
     env = {}
     while True:
         try:
-            text = input('basic > ')
+            text = input('yasic > ')
         except EOFError:
             break
         if text:
@@ -222,4 +222,4 @@ if __name__ == '__main__':
                 print(token)
             """
             tree = parser.parse(lexer.tokenize(text))
-            BasicExecute(tree, env)
+            YasicExecute(tree, env)
