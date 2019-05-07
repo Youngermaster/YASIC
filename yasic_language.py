@@ -21,17 +21,17 @@ class YasicLexer(Lexer):
     EQEQ = r'=='
 
     @_(r'\d+')
-    def NUMBER(self, t):
-        t.value = int(t.value)
-        return t
+    def NUMBER(self, token):
+        token.value = int(token.value)
+        return token
 
     @_(r'#.*')
-    def COMMENT(self, t):
+    def COMMENT(self, token):
         pass
 
     @_(r'\n+')
-    def newline(self,t ):
-        self.lineno = t.value.count('\n')
+    def newline(self,token):
+        self.lineno = token.value.count('\n')
 
 class YasicParser(Parser):
     tokens = YasicLexer.tokens
@@ -46,72 +46,72 @@ class YasicParser(Parser):
         self.env = { }
 
     @_('')
-    def statement(self, p):
+    def statement(self, parser):
         pass
 
     @_('FOR var_assign TO expr THEN statement')
-    def statement(self, p):
-        return ('for_loop', ('for_loop_setup', p.var_assign, p.expr), p.statement)
+    def statement(self, parser):
+        return ('for_loop', ('for_loop_setup', parser.var_assign, parser.expr), parser.statement)
 
     @_('IF condition THEN statement ELSE statement')
-    def statement(self, p):
-        return ('if_stmt', p.condition, ('branch', p.statement0, p.statement1))
+    def statement(self, parser):
+        return ('if_stmt', parser.condition, ('branch', parser.statement0, parser.statement1))
 
     @_('FUN NAME "(" ")" ARROW statement')
-    def statement(self, p):
-        return ('fun_def', p.NAME, p.statement)
+    def statement(self, parser):
+        return ('fun_def', parser.NAME, parser.statement)
 
     @_('NAME "(" ")"')
-    def statement(self, p):
-        return ('fun_call', p.NAME)
+    def statement(self, parser):
+        return ('fun_call', parser.NAME)
 
     @_('expr EQEQ expr')
-    def condition(self, p):
-        return ('condition_eqeq', p.expr0, p.expr1)
+    def condition(self, parser):
+        return ('condition_eqeq', parser.expr0, parser.expr1)
 
     @_('var_assign')
-    def statement(self, p):
-        return p.var_assign
+    def statement(self, parser):
+        return parser.var_assign
 
     @_('NAME "=" expr')
-    def var_assign(self, p):
-        return ('var_assign', p.NAME, p.expr)
+    def var_assign(self, parser):
+        return ('var_assign', parser.NAME, parser.expr)
 
     @_('NAME "=" STRING')
-    def var_assign(self, p):
-        return ('var_assign', p.NAME, p.STRING)
+    def var_assign(self, parser):
+        return ('var_assign', parser.NAME, parser.STRING)
 
     @_('expr')
-    def statement(self, p):
-        return (p.expr)
+    def statement(self, parser):
+        return (parser.expr)
 
     @_('expr "+" expr')
-    def expr(self, p):
-        return ('add', p.expr0, p.expr1)
+    def expr(self, parser):
+        return ('add', parser.expr0, parser.expr1)
 
     @_('expr "-" expr')
-    def expr(self, p):
-        return ('sub', p.expr0, p.expr1)
+    def expr(self, parser):
+        return ('sub', parser.expr0, parser.expr1)
 
     @_('expr "*" expr')
-    def expr(self, p):
-        return ('mul', p.expr0, p.expr1)
+    def expr(self, parser):
+        return ('mul', parser.expr0, parser.expr1)
 
     @_('expr "/" expr')
-    def expr(self, p):
-        return ('div', p.expr0, p.expr1)
+    def expr(self, parser):
+        return ('div', parser.expr0, parser.expr1)
 
     @_('"-" expr %prec UMINUS')
-    def expr(self, p):
-        return p.expr
+    def expr(self, parser):
+        return parser.expr
 
     @_('NAME')
-    def expr(self, p):
-        return ('var', p.NAME)
+    def expr(self, parser):
+        return ('var', parser.NAME)
 
     @_('NUMBER')
-    def expr(self, p):
-        return ('num', p.NUMBER)
+    def expr(self, parser):
+        return ('num', parser.NUMBER)
 
 
 

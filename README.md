@@ -12,22 +12,28 @@ Also this is my first programming language made on python 3.
 
 ## Which operations you can do?
 
-    ##### Note: You can use camelCase, snake_case or mix they to name functions or variables.
+    ##### Note: 
+    - You can use camelCase, snake_case or mix they to name functions or variables.
+    - The language doesn't recognize the parenthesis yet.
 
 * ## Math operations:
     * ### Addition.
-        You can add on those ways.
-        * 2 + 3
-        * a + b (In this case 'a' and 'b' can be number or strings).
+        You can add on these ways:
+        *   2 + 3
+        *   a + b (In this case 'a' and 'b' can be number or strings).
     *   ### Substraction.
         You can substract just with numbers.
         *   4 - 5
+        *   a - b
     *   ### Multiplication.
-        You can multiply just with numbers (for now).
-        * 20 * 5
+        You can multiply on these ways:
+        *   20 * 5
+        *   a * b
+        *   name * 3 (name can be whatever string that you want).
     *   ### Division.
         You can divide just with numbers.
         *   12 / 4
+        *   a / b
 *   ## Conditions:
     If you want to do conditions you have to follow the next structure:
     *   IF 'expression' THEN 'expression' ELSE 'expresion'.
