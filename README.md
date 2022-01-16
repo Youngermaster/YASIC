@@ -36,24 +36,36 @@ Also this is my first programming language made on python 3.
         *   a / b
 *   ## Conditions:
     If you want to do conditions you have to follow the next structure:
-    *   IF 'expression' THEN 'expression' ELSE 'expresion'.
+       ```basic
+       IF 'expression' THEN 'expression' ELSE 'expresion'.
+       ```
 
     A example can be:
+    ```basic
     IF a == 2 THEN a = a * 4 ELSE a = a / 3
+    ```
 
 *   ## Loops:
     If you want to do a loop you have to follow the next structure:
-    * FOR 'expression' TO 'expression' THEN 'expression'
+    ```basic
+    FOR 'expression' TO 'expression' THEN 'expression'
+    ```
 
     A example can be:
+    ```basic
     FOR x = 0 TO 5 THEN x * 2
+    ```
 
 *   ## Functions:
     If you want to do simple functions you have to follow the next structure:
-    *   FUN 'function name'() -> 'expression'
+       ```basic
+       FUN 'function name'() -> 'expression'
+       ```
     
     A example can be:
+    ```basic
     FUN myFirstYasicFunction() -> FOR x = 0 TO 10 THEN IF x == 4 THEN x * 100 ELSE x
+    ```
 
 ## Autor 
 ##### Juan Manuel Young Hoyos.
